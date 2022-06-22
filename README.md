@@ -104,6 +104,63 @@ a `PropertyDescriptor` describes a property on an Object. Any JavaScript object 
 - value (object)
 - writable (boolean)
 
+## Configurable
+
+if configurable key sets to true, `PropertyDescriptor` can be changed later. `Object.freeze()` and `Object.seal()` methods for ways to set configurable to false on all properties on an object.
+
+```
+var x = {}
+Object.defineProperty( x, 'foo', {
+    value: 1,
+    writable: false,
+    enumerable: true,
+    configurable: false
+} )
+
+try {
+    // Attempt to override non-configurable property descriptor
+    Object.defineProperty( x, 'foo', {
+        value: 1,
+        writable: true,
+        enumerable: true,
+        configurable: false
+    } )
+} catch ( e ) {
+    console.log( 'Error:' )
+    console.log( e )
+}
+```
+
+```diff
+- The following lines are for those who are not very familiar with the two methods mentioned
+```
+
+### Object.freeze()
+
+when for an object we set this method (like method name), it freeze the object and we can't add or change property or key | value in the object after definition them like below code:
+
+```
+var x = { foo: 1 };
+Object.freeze(x);
+x.foo = 3;
+console.log(x.foo); // 1
+x.bar = 1;
+console.log(x.bar); // undefined
+```
+
+### Object.seal()
+
+this method is very similar to the freeze method, except that, we can change property in an object but we can't `add` property to an object after definition Object.seal() to current object.
+
+```
+var x = { foo: 1 };
+Object.seal(x);
+x.foo = 3;
+console.log(x.foo); //3
+x.bar = 1;
+console.log(x.bar); //undefined
+```
+
 if we do that, we let the decorator know that "hey let me target, name, description of price accessor".
 so decorator passes these:
 
