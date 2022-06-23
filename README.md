@@ -6,7 +6,7 @@ when you define accessor you should have to be sure that your decorator access t
 
 for example:
 
-```
+```js
 class Product {
 
     @Log
@@ -36,11 +36,11 @@ class Product {
 
 when you define your decorator like:
 
-```
-function Log ( target: any, name: string | symbol ) {
-     console.log( "Property decorator:" )
-     console.log( target )
-     console.log( name )
+```js
+function Log(target: any, name: string | symbol) {
+  console.log("Property decorator:");
+  console.log(target);
+  console.log(name);
 }
 ```
 
@@ -130,9 +130,9 @@ try {
 }
 ```
 
-````diff
+```diff
 - The following lines are for those who are not very familiar with the two methods mentioned
-
+```
 
 ### Object.freeze()
 
@@ -145,7 +145,7 @@ x.foo = 3;
 console.log(x.foo); // 1
 x.bar = 1;
 console.log(x.bar); // undefined
-````
+```
 
 ### Object.seal()
 
@@ -160,7 +160,6 @@ x.bar = 1;
 console.log(x.bar); //undefined
 ```
 
-````
 if we do that, we let the decorator know that "hey let me target, name, description of price accessor".
 so decorator passes these:
 
@@ -168,6 +167,6 @@ so decorator passes these:
 { constructor, getPriceWithTax, set price }
 price
 { get: undefined, enumerable: false, configurable: true, set: ƒ }
-````
+```
 
 we can deduce this from the above lines:
