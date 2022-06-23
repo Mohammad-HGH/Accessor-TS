@@ -6,6 +6,8 @@ when you define accessor you should have to be sure that your decorator access t
 
 for example:
 
+**code:**
+
 ```js
 class Product {
 
@@ -36,6 +38,8 @@ class Product {
 
 when you define your decorator like:
 
+**code:**
+
 ```js
 function Log(target: any, name: string | symbol) {
   console.log("Property decorator:");
@@ -47,13 +51,17 @@ function Log(target: any, name: string | symbol) {
 - you can access to target (which in include all functions in your class, constructor too)
 - also you can get name of closest property of decorator assigned to this like:
 
-  ```js
-    private _price: number
-  ```
+  **code:**
 
-  private environment variable called `_price`.
+```js
+    private _price: number
+```
+
+private environment variable called `_price`.
 
 we can define other accessor method named: `Log2` like that:
+
+**code:**
 
 ```js
 function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
@@ -65,6 +73,8 @@ function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
 ```
 
 and define it before `set price` like that:
+
+**code:**
 
 ```js
 class Product {
@@ -107,6 +117,8 @@ a `PropertyDescriptor` describes a property on an Object. Any JavaScript object 
 
 if configurable key sets to true, `PropertyDescriptor` can be changed later. `Object.freeze()` and `Object.seal()` methods for ways to set configurable to false on all properties on an object.
 
+**code:**
+
 ```js
 var x = {};
 Object.defineProperty(x, "foo", {
@@ -130,13 +142,17 @@ try {
 }
 ```
 
-```diff
-- The following lines are for those who are not very familiar with the two methods mentioned
-```
+description above code:
+<br>
+we defined object `x`. when we define configurable property 'false', we can't redefined selected property and change it!
+
+<span style="color: red"> - The following lines are for those who are not very familiar with the two methods mentioned</span>
 
 ### Object.freeze()
 
 when for an object we set this method (like method name), it freeze the object and we can't add or change property or key | value in the object after definition them like below code:
+
+**code:**
 
 ```js
 var x = { foo: 1 };
@@ -151,6 +167,8 @@ console.log(x.bar); // undefined
 
 this method is very similar to the freeze method, except that, we can change property in an object but we can't `add` property to an object after definition Object.seal() to current object.
 
+**code:**
+
 ```js
 var x = { foo: 1 };
 Object.seal(x);
@@ -160,8 +178,55 @@ x.bar = 1;
 console.log(x.bar); //undefined
 ```
 
+## Enumerable
+
+**code:**
+
+```js
+var x = { foo: 1 };
+Object.defineProperty(x, "bar", {
+  value: 2,
+  writable: true,
+  enumerable: false,
+  configurable: true,
+});
+
+// 'foo' is enumerable. 'bar' in not enumerable
+for (var propertyName in x) {
+  console.log(propertyName + " is " + x[propertyName]);
+}
+```
+
+when we define enumerable property to 'true', we accessed during for <span style="color: green">propertyName</span> in object. so for this reason, I draw your attention to the following method:
+
+<br>
+
+### propertyIsEnumerable()
+
+with this <span style="color: pink">inside</span> function we can set which properties can be counted in the object we defined.
+
+**code:**
+
+```js
+var x = { foo: 1 };
+Object.defineProperty(x, "bar", {
+  value: 2,
+  writable: true,
+  enumerable: false,
+  configurable: true,
+});
+console.log(x.propertyIsEnumerable("foo")); // true
+console.log(x.propertyIsEnumerable("bar")); // false
+
+for (var propertyName in x) /* propertyName is key in object x */ {
+  console.log(propertyName + " is " + x[propertyName]); //foo is 1
+}
+```
+
 if we do that, we let the decorator know that "hey let me target, name, description of price accessor".
 so decorator passes these:
+
+**code:**
 
 ```js
 { constructor, getPriceWithTax, set price }
