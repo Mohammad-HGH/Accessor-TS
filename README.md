@@ -113,7 +113,7 @@ a `PropertyDescriptor` describes a property on an Object. Any JavaScript object 
 - value (object)
 - writable (boolean)
 
-## Configurable
+## <span style="color: yellow"> Configurable </span>
 
 if configurable key sets to true, `PropertyDescriptor` can be changed later. `Object.freeze()` and `Object.seal()` methods for ways to set configurable to false on all properties on an object.
 
@@ -178,7 +178,7 @@ x.bar = 1;
 console.log(x.bar); //undefined
 ```
 
-## Enumerable
+## <span style="color: yellow">Enumerable</span>
 
 **code:**
 
@@ -221,6 +221,31 @@ console.log(x.propertyIsEnumerable("bar")); // false
 for (var propertyName in x) /* propertyName is key in object x */ {
   console.log(propertyName + " is " + x[propertyName]); //foo is 1
 }
+```
+
+<span style="color: red">
+Note:
+</span>
+dear guys we jumped <span style="color: green">get</span>, <span style="color: green">set</span>, <span style="color: green">value</span> because these are too simple to understand but if you think you should know more about them, you can visit this page:
+
+[ Know more about PropertyDescriptor ](https://www.javascripture.com/PropertyDescriptor)
+
+## <span style="color: yellow">Writable</span>
+
+if we set true <span style="color: green">writable</span> propertyDescriptor, we can edit value of selected property in wherever (after definition).
+
+**code:**
+
+```js
+var x = { foo: 1 };
+Object.defineProperty(x, "bar", { value: 2, writable: false });
+
+x.foo = 1234;
+console.log(x.foo); // 1234
+
+// bar is not writable.  Setting it silently fails.
+x.bar = 1234;
+console.log(x.bar); // 2
 ```
 
 if we do that, we let the decorator know that "hey let me target, name, description of price accessor".
