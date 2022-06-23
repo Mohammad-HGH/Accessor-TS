@@ -1,5 +1,19 @@
 # Accessor-TS
 
+You can download this repo (or clone) and extract it.
+
+```
+    git clone https://github.com/Mohammad-HGH/Accessor-TS.git
+```
+
+after extraction, go to directory and run:
+
+`npm install`
+
+and then run:
+
+`npm start`
+
 In TypeScript, there are two supported methods getter and setter to access and set the class members. The greater method control over how a member is accessed on each object.
 
 when you define accessor you should have to be sure that your decorator access to which parameter in your class.
