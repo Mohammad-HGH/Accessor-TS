@@ -104,6 +104,17 @@ class Product {
 in vanilla javascript we have `PropertyDescriptor`.
 a `PropertyDescriptor` describes a property on an Object. Any JavaScript object can be used as a PropertyDescriptor where unspecified properties will be treated as undefined or false.
 
+if we do that, we let the decorator know that "hey let me target, name, description of price accessor".
+so decorator passes these:
+
+**code:**
+
+```js
+{ constructor, getPriceWithTax, set price }
+price
+{ get: undefined, enumerable: false, configurable: true, set: ƒ }
+```
+
 `PropertyDescriptor` has above keys.
 
 - configurable (boolean)
@@ -247,16 +258,3 @@ console.log(x.foo); // 1234
 x.bar = 1234;
 console.log(x.bar); // 2
 ```
-
-if we do that, we let the decorator know that "hey let me target, name, description of price accessor".
-so decorator passes these:
-
-**code:**
-
-```js
-{ constructor, getPriceWithTax, set price }
-price
-{ get: undefined, enumerable: false, configurable: true, set: ƒ }
-```
-
-we can deduce this from the above lines:
